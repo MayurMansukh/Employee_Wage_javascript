@@ -23,44 +23,51 @@ function calcWage(totalWorkinghrs){
 }
 
 let empWage=0;
-//Uc7a
+//UC7A
 function sum(dailwage){
     return empWage+=dailwage;
 }
 
-//Uc7b
+//UC7B
 let dayCounter=0;
 function dayCount(dailwage){
     dayCounter++;
     return dayCounter +" = "+dailwage;
 }
 
-//Uc7c
+//UC7C
 function getFulltimwage(dailwage){
     return dailwage.includes("160");
 }
 
-//Uc7f
+//UC7F
 function getPartTime(dailwage){
     return dailwage.includes("80");
+}
+
+//UC9A
+const findTotal = (totalVal,dailyVal) => {
+    return totalVal+dailyVal;
 }
 
 let emphrs=0;
 let totalWorkinghrs=0;
 let totalworkingDays=0;
+let empHrsArr=[];
 
 while(totalWorkinghrs<=TOTAL_WORKING_HRS && totalworkingDays<MAX_NUMBER_OF_WORKING_DAYS){
     totalworkingDays++;
     let empcheck=Math.floor((Math.random()*10)%3);
     emphrs=getempHrs(empcheck);
     totalWorkinghrs+=emphrs;
+    empHrsArr.push(emphrs);
     dailWage.push(calcWage(emphrs));
 }
 
-//Uc7a
+//UC7A
 dailWage.forEach(sum);
 
-//Uc7b
+//UC7B
 let mapDayWithWage=dailWage.map(dayCount);
 console.log("Day with employee wage: "+mapDayWithWage);
 
@@ -69,16 +76,37 @@ console.log("Total Hours: "+totalWorkinghrs);
 console.log("Total Working Days: "+totalworkingDays);
 console.log("Daily Wage of a employee is: "+empWage);
 
-//Uc7c
+//UC7C
 let fulltimeWage=mapDayWithWage.filter(getFulltimwage);
 console.log("Days where is full time wage: ");
 console.log(fulltimeWage);
 
-//Uc7d
+//UC7D
 console.log("Day where it is full time wage: "+mapDayWithWage.find(getFulltimwage));
 
-//Uc7e
+//UC7E
 console.log("Check All Element have Full Time Wage "+fulltimeWage.every(getFulltimwage));
 
-//Uc7af
+//UC7F
 console.log("Check for Part time wage: "+mapDayWithWage.some(getPartTime));
+
+//UC9A
+let count=0;
+let totalHrs=Array.from(mapDayWithWage.values()).reduce(findTotal,0);
+let totalSalary=dailWage.filter(dailwage => dailwage>0).reduce(findTotal,0);
+console.log("Emp Wage wit Arrow "+"Total hrs: "+totalHrs+"Total Salary: "+totalSalary);
+
+//UC9B
+let nonWorkingDays=[];
+let partWorkingDays=[];
+let fullWorkingDays=[];
+
+empHrsArr.forEach((value,key,map) => {
+    if(value == 8) fullWorkingDays.push(key);
+    else if(value == 4)partWorkingDays.push(key);
+    else nonWorkingDays.push(key);
+});
+
+console.log("Full working Days are: "+fullWorkingDays);
+console.log("Part working Days are: "+partWorkingDays);
+console.log("Non working Days are: "+nonWorkingDays);
