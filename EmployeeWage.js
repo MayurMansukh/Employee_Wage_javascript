@@ -62,7 +62,7 @@ dailWage.forEach(sum);
 
 //Uc7b
 let mapDayWithWage=dailWage.map(dayCount);
-console.log(mapDayWithWage);
+console.log("Day with employee wage: "+mapDayWithWage);
 
 console.log("Daily wage is: "+dailWage);
 console.log("Total Hours: "+totalWorkinghrs);
@@ -80,5 +80,5 @@ console.log("Day where it is full time wage: "+mapDayWithWage.find(getFulltimwag
 //Uc7e
 console.log("Check All Element have Full Time Wage "+fulltimeWage.every(getFulltimwage));
 
-//Uc7f
+//Uc7af
 console.log("Check for Part time wage: "+mapDayWithWage.some(getPartTime));
